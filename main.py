@@ -30,8 +30,8 @@ def handleInputX():
         if inputX == 'top-M':
             theBoard.update({"top-M": "X"})
 
-        if inputX == 'top-R':
-            theBoard.update({"top-L": 'X'})
+        if inputX == 'mid-R':
+            theBoard.update({"top-R": 'X'})
         if inputX == 'top-R':
             theBoard.update({"top-R": "X"})
 
@@ -92,24 +92,33 @@ def handleInputO():
 while playerDidWin != True:
     handleInputX()
     pBoard(theBoard)
-  
+    playerTurn += 1
 
     handleInputO()
     pBoard(theBoard)
-    
+    playerTurn -= 1
 
-winPossibilities = {
-    "Possibility1": theBoard['top-L'] == "X" and theBoard['mid-L'] == "X" and theBoard['low-L'] == "X",
-    "Possibility2": theBoard['top-M'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-M'] == "X",
-    "Possibility3": theBoard['top-R'] == "X" and theBoard['mid-R'] == "X" and theBoard['low-R'] == "X",
-    "Possibility4": theBoard['top-L'] == "X" and theBoard['top-M'] == "X" and theBoard['top-R'] == "X",
-    "Possibility5": theBoard['mid-L'] == "X" and theBoard['mid-M'] == "X" and theBoard['mid-R'] == "X",
-    "Possibility6": theBoard['low-L'] == "X" and theBoard['low-M'] == "X" and theBoard['low-R'] == "X",
-    "Possibility7": theBoard['top-R'] == "X" and theBoard['mid-R'] == "X" and theBoard['low-R'] == "X",
-    "Possibility8": theBoard['top-L'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-R'] == "X",
-    "Possibility9": theBoard['top-R'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-L'] == "X"
-}
-   
+if (
+        theBoard['top-L'] == "X" and theBoard['mid-L'] == "X" and theBoard['low-L'] == "X"
+        or
+        theBoard['top-M'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-M'] == "X"
+        or
+        theBoard['top-R'] == "X" and theBoard['mid-R'] == "X" and theBoard['low-R'] == "X"
+        or
+        theBoard['top-L'] == "X" and theBoard['top-M'] == "X" and theBoard['top-R'] == "X"
+        or
+        theBoard['mid-L'] == "X" and theBoard['mid-M'] == "X" and theBoard['mid-R'] == "X"
+        or
+        theBoard['low-L'] == "X" and theBoard['low-M'] == "X" and theBoard['low-R'] == "X"
+        or
+        theBoard['top-R'] == "X" and theBoard['mid-R'] == "X" and theBoard['low-R'] == "X"
+        or
+        theBoard['top-L'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-R'] == "X"
+        or
+        theBoard['top-R'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-L'] == "X"
+
+):
+    playerDidWin = True
 
 if playerDidWin == True:
     print("Player ", playerTurn, " has won!")
