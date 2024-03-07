@@ -3,8 +3,8 @@ print("Tic Tac Toe\n")
 # startInput = input("Press S to start, ")
 
 
-playerTurn = 1
-playerDidWin = False
+PLAYER_TURN = 1
+PLAYER_DID_WIN = False
 print("You are Player 1, which is X.\nGrids are A1-A3, B1-B3, C1-C3")
 # inputX = input("Player 1 go, you may type in this format 'top-L', 'mid-L', 'low-L': ")
 theBoard = {'top-L': ' ', 'top-M': ' ', 'top-R': ' ',
@@ -12,7 +12,7 @@ theBoard = {'top-L': ' ', 'top-M': ' ', 'top-R': ' ',
             'low-L': ' ', 'low-M': ' ', 'low-R': ' '}
 
 
-def pBoard(board):
+def p_board(board):
     print("\n-=-=-=-=-=-=-=-=-=-=\n")
     print(board['top-L'] + '|' + board['top-M'] + '|' + board['top-R'])
     print('-+-+-')
@@ -21,82 +21,81 @@ def pBoard(board):
     print(board['low-L'] + '|' + board['low-M'] + '|' + board['low-R'])
 
 
-def handleInputX():
-    playerTurn = 1
-    inputX = input("\nPlayer 1 go, you may type in this format 'top-L', 'mid-L', 'low-L': ")
-    if playerTurn == 1:
-        if inputX == 'top-L':
+def handle_inputX():
+   
+    input_x = input(
+        "\nPlayer 1 go, you may type in this format 'top-L', 'mid-L', 'low-L': ")
+    if PLAYER_TURN == 1:
+        if input_x == 'top-L':
             theBoard.update({'top-L': 'X'})
-        if inputX == 'top-M':
+        if input_x == 'top-M':
             theBoard.update({"top-M": "X"})
 
-        if inputX == 'top-R':
+        if input_x == 'top-R':
             theBoard.update({"top-L": 'X'})
-        if inputX == 'top-R':
+        if input_x == 'top-R':
             theBoard.update({"top-R": "X"})
 
-        if inputX == 'mid-L':
+        if input_x == 'mid-L':
             theBoard.update({"mid-L": "X"})
 
-        if inputX == 'mid-M':
+        if input_x == 'mid-M':
             theBoard.update({"mid-M": "X"})
 
-        if inputX == 'mid-R':
+        if input_x == 'mid-R':
             theBoard.update({"mid-R": "X"})
 
-        if inputX == 'low-L':
+        if input_x == 'low-L':
             theBoard.update({"low-L": "X"})
 
-        if inputX == 'low-M':
+        if input_x == 'low-M':
             theBoard.update({"low-M": "X"})
 
-        if inputX == 'low-R':
+        if input_x == 'low-R':
             theBoard.update({"low-R": "X"})
 
 
-def handleInputO():
-    playerTurn = 2
-    inputX = input("\nPlayer 2 go, you may type in this format 'top-L', 'mid-L', 'low-L': ")
-    if playerTurn == 2:
+def handle_Input_O():
+    player_Turn = 2
+    input_x = input(
+        "\nPlayer 2 go, you may type in this format 'top-L', 'mid-L', 'low-L': ")
+    if player_Turn == 2:
 
-        if inputX == 'top-L':
+        if input_x == 'top-L':
             theBoard.update({'top-L': 'O'})
-        if inputX == 'top-M':
+        if input_x == 'top-M':
             theBoard.update({"top-M": "O"})
 
-        if inputX == 'top-R':
+        if input_x == 'top-R':
             theBoard.update({"top-R": "O"})
 
-        if inputX == 'mid-L':
+        if input_x == 'mid-L':
             theBoard.update({"mid-L": "O"})
 
-        if inputX == 'mid-M':
+        if input_x == 'mid-M':
             theBoard.update({"mid-M": "O"})
 
-        if inputX == 'mid-R':
+        if input_x == 'mid-R':
             theBoard.update({"mid-R": "O"})
 
-        if inputX == 'low-L':
+        if input_x == 'low-L':
             theBoard.update({"low-L": "O"})
 
-        if inputX == 'low-M':
+        if input_x == 'low-M':
             theBoard.update({"low-M": "O"})
 
-        if inputX == 'low-R':
+        if input_x == 'low-R':
             theBoard.update({"low-R": "O"})
 
 
 # printBoard and theBoard code from https://medium.com/@pk1288780/creating-tic-tac-toe-in-python-using-dictionaries
 # -70ab8ab49a19
-
-while playerDidWin != True:
-    handleInputX()
-    pBoard(theBoard)
-  
-
-    handleInputO()
-    pBoard(theBoard)
-    
+def input_loop():
+    while not PLAYER_DID_WIN:
+        handle_inputX()
+        p_board(theBoard)
+        handle_Input_O()
+        p_board(theBoard)
 
 winPossibilities = {
     "Possibility1": theBoard['top-L'] == "X" and theBoard['mid-L'] == "X" and theBoard['low-L'] == "X",
@@ -109,13 +108,4 @@ winPossibilities = {
     "Possibility8": theBoard['top-L'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-R'] == "X",
     "Possibility9": theBoard['top-R'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-L'] == "X"
 }
-   
 
-if playerDidWin == True:
-    print("Player ", playerTurn, " has won!")
-
-# print("You are Player 2 which is O.\nGrids are A1-A3, B1-B3, C1-C3")
-# input("Player 2 go, you may type in this format 'top-L', 'mid-L', 'low-L': ")
-
-
-# printBoard(theBoard)
