@@ -1,3 +1,11 @@
 {
-    "python.analysis.typeCheckingMode": "basic"
+    "python.analysis.typeCheckingMode": "basic",
+    "python.testing.pytestArgs": [
+        "."
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "todo-tree.tree.showBadges": false,
+    "todo-tree.tree.showCountsInTree": true,
+    "python.analysis.autoImportCompletions": false
 }
