@@ -6,7 +6,9 @@ def welcome_player():
 
 
 welcome_player()
+global PLAYER_TURN
 PLAYER_TURN = 1
+global PLAYER_DID_WIN
 PLAYER_DID_WIN = False
 print("You are Player 1, which is X.")
 
@@ -22,6 +24,7 @@ theBoard = {
     "low-R": " ",
 }
 
+#row1 = theBoard.zip(key in key, value in row1)
 
 def p_board(board):
     """prints the playing board
@@ -41,10 +44,12 @@ def p_board(board):
 
 def handle_input_x():
     """handles input of player 1"""
-    print(PLAYER_DID_WIN)
-    input_x = input(
-        "\nPlayer 1 go, you may type in this format 'top-L', 'mid-L', 'low-L': "
-    )
+
+    print(PLAYER_DID_WIN, "test 1", "it is now player", PLAYER_TURN)
+    if PLAYER_TURN == 1:
+        input_x = input(
+            "\nPlayer 1 go, you may type in this format 'top-L', 'mid-L', 'low-L': "
+        )
     if PLAYER_TURN == 1:
         if input_x == "top-L":
             theBoard.update({"top-L": "X"})
@@ -55,9 +60,9 @@ def handle_input_x():
             # PLAYER_DID_WIN = True
             print("test")
         if input_x == "top-R":
-            theBoard.update({"top-L": "X"})
-        if input_x == "top-R":
             theBoard.update({"top-R": "X"})
+        if input_x == "top-L":
+            theBoard.update({"top-L": "X"})
 
         if input_x == "mid-L":
             theBoard.update({"mid-L": "X"})
@@ -79,13 +84,15 @@ def handle_input_x():
 
 
 def handle_input_o():
-    print(PLAYER_DID_WIN)
     """handles input of player 2"""
-    player_turn = 2
-    input_x = input(
-        "\nPlayer 2 go, you may type in this format 'top-L', 'mid-L', 'low-L': "
-    )
-    if player_turn == 2:
+    global PLAYER_TURN
+
+    print(PLAYER_DID_WIN, "test 2", "it is now player", PLAYER_TURN)
+    if PLAYER_TURN == 2:
+        input_x = input(
+            "\nPlayer 2 go, you may type in this format 'top-L', 'mid-L', 'low-L': "
+        )
+    if PLAYER_TURN == 2:
 
         if input_x == "top-L":
             theBoard.update({"top-L": "O"})
@@ -118,55 +125,41 @@ def handle_input_o():
 # https://medium.com/@pk1288780/creating-tic-tac-toe-in-python-using-dictionaries-70ab8ab49a19
 def input_loop():
     """_handles the input loop"""
-    while not PLAYER_DID_WIN:
+    global PLAYER_TURN
+    while not PLAYER_DID_WIN and PLAYER_TURN == 1:
         
         handle_input_x()
         p_board(theBoard)
+        win_check()
+        PLAYER_TURN += 1
+    
+    while not PLAYER_DID_WIN and PLAYER_TURN == 2:
+        
         handle_input_o()
         p_board(theBoard)
-        
         win_check()
-        
-
-"""winPossibilities = {
-    "Possibility1":
-    theBoard['top-L'] == "X" and theBoard['mid-L'] == "X" and theBoard['low-L'] == "X",
-    "Possibility2":
-    theBoard['top-M'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-M'] == "X",
-    "Possibility3":
-    theBoard['top-R'] == "X" and theBoard['mid-R'] == "X" and theBoard['low-R'] == "X",
-    "Possibility4":
-    theBoard['top-L'] == "X" and theBoard['top-M'] == "X" and theBoard['top-R'] == "X",
-    "Possibility5":
-    theBoard['mid-L'] == "X" and theBoard['mid-M'] == "X" and theBoard['mid-R'] == "X",
-    "Possibility6":
-    theBoard['low-L'] == "X" and theBoard['low-M'] == "X" and theBoard['low-R'] == "X",
-    "Possibility7":
-    theBoard['top-R'] == "X" and theBoard['mid-R'] == "X" and theBoard['low-R'] == "X",
-    "Possibility8":
-    theBoard['top-L'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-R'] == "X",
-    "Possibility9":
-    theBoard['top-R'] == "X" and theBoard['mid-M'] == "X" and theBoard['low-L'] == "X"
-}
-"""
-
-if theBoard["top-L"] == "X":
-    if theBoard["top-M"] == "X":
-        if theBoard["top-R"] == "X":
-            PLAYER_DID_WIN = True
-print(theBoard["top-L"], theBoard["top-M"], theBoard["top-R"])
-
+        PLAYER_TURN -= 1
+        input_loop()
 
 def win_check():
     """this checks if winner won"""
-    if PLAYER_DID_WIN is True:
-        sys.exit(0)
-        # FIXME: #1 Player Win check
+    global PLAYER_DID_WIN
+
+    if theBoard["top-L"] == "X" and theBoard["top-M"] == "X" and theBoard["top-R"] == "X":
+    
+        PLAYER_DID_WIN = True
+        if PLAYER_DID_WIN is True:
+            print("\nPlayer 1 won\n")
+    elif  theBoard["top-L"] == "O" and theBoard["top-M"] == "O" and theBoard["top-R"] == "O":
+        PLAYER_DID_WIN = True
+        if PLAYER_DID_WIN is True:
+            print("\nPlayer 2 won\n")
 
 
 def main():
     """main func"""
     input_loop()
+
 
 if __name__ == "__main__":
     main()
